@@ -5,8 +5,6 @@ from pathlib import Path
 from openpyxl import Workbook
 import concurrent.futures
 
-# Don't forget to convert to lowercase
-
 
 def analyseContent(content):
 
@@ -57,8 +55,6 @@ def analyseFile(filename):
 
 
 def analyseFiles(dir_name, urls):
-
-    # try-catch or default arguments
 
     dir_path = os.path.join(
         Path(__file__).resolve().parent.parent, dir_name)
