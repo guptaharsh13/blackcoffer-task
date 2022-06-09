@@ -1,6 +1,7 @@
 from dotenv import dotenv_values
 from pathlib import Path
 import os
+import platform
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -24,13 +25,12 @@ def setupChromedriver():
     chrome_options = Options()
 
     if python_env == "production":
-
-        try:
-            display = Display(visible=0, size=(1920, 1080))
-            display.start()
-        except:
-            # some info and auto-detect linux
-            quit({"production": "Something went wrong while configuring display"})
+        if platform.system() == "Linux":
+            try:
+                display = Display(visible=0, size=(1920, 1080))
+                display.start()
+            except:
+                quit({"production": "Something went wrong while configuring display"})
 
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--no-sandbox")

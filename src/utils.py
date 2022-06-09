@@ -107,8 +107,6 @@ def countSyllables(word):
 
 def countComplex(content):
 
-    # assuming content is words
-
     count = 0
     for token in content:
         if countSyllables(token) > 2:
@@ -134,16 +132,11 @@ nltk_stop_words = stopwords.words("english")
 
 def countCleanWords(content):
 
-    # assume content is words
-
     content = clean(content=content, stop_words=nltk_stop_words)
     return len(content)
 
 
 def findPersonalPronouns(content):
-
-    # assuming content is complete para
-    # assuming org content (wrt lowercase char)
 
     personal_pronouns = re.findall(
         r"(i|we|my|ours|us)", content.replace("US", "").lower())
@@ -152,8 +145,6 @@ def findPersonalPronouns(content):
 
 def findAvgWordLen(content):
 
-    # assuming content is words
-
     count = 0
     for token in content:
         count += len(token)
@@ -161,8 +152,6 @@ def findAvgWordLen(content):
 
 
 def findSyllableCountPerWord(content):
-
-    # assuming content is words
 
     count = 0
     for token in content:

@@ -1,12 +1,15 @@
 import csv
 from openpyxl import load_workbook
-# selenium is slower in this case (tested) - compares by a time difference of 16 minutes
 # from scraper_selenium import findContent
+# bs4 would be much faster in the current situation (tested) - compares by a time difference of 16 minutes
 from scraper_bs4 import findContent
 import os
 from pathlib import Path
-from data_analysis import analyseFiles, saveOutput
+from data_analysis import analyseFiles
 import concurrent.futures
+from logger_config import configLogger
+
+main_logger = configLogger(__name__)
 
 
 def readCSV(filename):
@@ -69,10 +72,10 @@ def main():
         done, not_done = concurrent.futures.wait(
             fs=futures, return_when=concurrent.futures.ALL_COMPLETED)
         if not_done:
-            # implement logging and report error
-            pass
+            main_logger.critical("Unable to scrape data from URLs")
+            quit({"error": "Unable to scrape data from URLs"})
         if done:
-            print("done")
+            main_logger.info("completed URLs extraction")
 
     analyseFiles(dir_name="articles", urls=urls)
 
