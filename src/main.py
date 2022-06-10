@@ -59,7 +59,7 @@ def combine(url_id, url, dir_name):
 def main():
 
     input_file_path = os.path.join(Path(__file__).resolve(
-    ).parent.parent, "Input.xlsx - Sheet1.csv")
+    ).parent.parent, "Input.csv")
 
     # read from xlsx is slower as compared to csv, Thus, I have made use of a csv file over an xlsx file to read input data (url_ids and urls)
     # urls = readXLSX(input_file_path)
